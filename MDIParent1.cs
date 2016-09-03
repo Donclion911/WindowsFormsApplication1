@@ -17,7 +17,6 @@ namespace WindowsFormsApplication1
         {
             InitializeComponent();
         }
-
         private void ShowNewForm(object sender, EventArgs e)
         {
             Form childForm = new Form();
@@ -25,7 +24,6 @@ namespace WindowsFormsApplication1
             childForm.Text = "Form " + childFormNumber++;
             childForm.Show();
         }
-
         private void OpenFile(object sender, EventArgs e)
         {
             OpenFileDialog openFileDialog = new OpenFileDialog();
@@ -36,7 +34,6 @@ namespace WindowsFormsApplication1
                 string FileName = openFileDialog.FileName;
             }
         }
-
         private void SaveAsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             SaveFileDialog saveFileDialog = new SaveFileDialog();
@@ -47,7 +44,6 @@ namespace WindowsFormsApplication1
                 string FileName = saveFileDialog.FileName;
             }
         }
-
         private void ExitToolsStripMenuItem_Click(object sender, EventArgs e)
         {
             this.Close();
@@ -56,7 +52,6 @@ namespace WindowsFormsApplication1
         {
             toolStrip.Visible = toolBarToolStripMenuItem.Checked;
         }
-
         private void StatusBarToolStripMenuItem_Click(object sender, EventArgs e)
         {
             statusStrip.Visible = statusBarToolStripMenuItem.Checked;
@@ -65,7 +60,6 @@ namespace WindowsFormsApplication1
         {
             LayoutMdi(MdiLayout.Cascade);
         }
-
         private void TileVerticalToolStripMenuItem_Click(object sender, EventArgs e)
         {
             LayoutMdi(MdiLayout.TileVertical);
