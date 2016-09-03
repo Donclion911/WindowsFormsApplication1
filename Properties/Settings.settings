@@ -18,5 +18,8 @@
 &lt;/SerializableConnectionString&gt;</DesignTimeValue>
       <Value Profile="(Default)">Data Source=|DataDirectory|\master.sdf;Max Database Size=2047</Value>
     </Setting>
+    <Setting Name="Items" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

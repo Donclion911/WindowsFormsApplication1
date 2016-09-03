@@ -1,13 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using System.Data.SqlClient;
-using System.Diagnostics;
+
 namespace WindowsFormsApplication1
 {
     public partial class Form1 : Form
@@ -18,6 +17,9 @@ namespace WindowsFormsApplication1
         SqlCommandBuilder comm;
         BindingSource bs;
         DataRow newRow;
+        public List<UserControl1> LC;
+        Dictionary<string, string> combosource;
+        public List<UserControl2> LCx;
         public Form1()
         {
             InitializeComponent();
@@ -51,6 +53,8 @@ namespace WindowsFormsApplication1
         }
         private void Form1_Load(object sender, EventArgs e)
         {
+            LC = new List<UserControl1>();
+            LCx = new List<UserControl2>();
             dt=new DataTable();
             adp = new SqlDataAdapter("select * from Orders", cnn);
             bs = new BindingSource();
@@ -66,6 +70,38 @@ namespace WindowsFormsApplication1
             CMM.DataBindings.Add(new Binding("Text", bs, "Comments", true, DataSourceUpdateMode.OnValidation));
             CN.DataBindings.Add(new Binding("Text", bs, "CustomerName", true, DataSourceUpdateMode.OnValidation));
             loadTable();
+            combosource = new Dictionary<string, string>();
+            foreach (DataColumn dc in this.dt.Columns)
+            {
+                combosource.Add(dc.Caption, dc.DataType.ToString());
+            }
+            addOption();
+            
+        }
+        public void addOption()
+        {
+            LC.Add(new UserControl1());
+            LC.Last().Size = new Size(317, 39);
+            LC.Last().Dock = DockStyle.Top;
+            LC.Last().index = LC.Count - 1;
+            bindColumes(LC.Last());
+
+            LCx.Add(new UserControl2());
+            LCx.Last().getPernt(this,LC.Last());
+            LCx.Last().radioButton3.Checked = true;
+            LC.Last().children = LCx.Last();
+            LCx.Last().Dock = DockStyle.Top;
+
+            this.panel1.Controls.Add(LCx.Last());
+            this.panel1.Controls.Add(LC.Last());
+        }
+        private void bindColumes(UserControl1 x)
+        {
+            x.Columes.DataSource = new BindingSource(combosource, null);
+            x.Columes.DisplayMember = "Key";
+            x.Columes.ValueMember = "Value";
+            x.Columes.SelectedIndex = 0;
+            x.afterloading = true;
         }
         private void loadTable()
         {
@@ -86,32 +122,7 @@ namespace WindowsFormsApplication1
                 {
                     temp.Visible = false;
                 }
-
             }
-        }
-        private void button1_Click(object sender, EventArgs e)
-        {
-            StringBuilder feedback = new StringBuilder();
-            try
-            {
-                comm = new SqlCommandBuilder(adp);
-                feedback.Append(MessageBox.Show(this, 
-                             "Do you want to saving your changed?", 
-                             "Enter", MessageBoxButtons.YesNo));
-                if (feedback.ToString() == "Yes")
-                {
-                    adp.Update(dt);
-                    this.dataGridView1.DataSource = null;
-                    this.dataGridView1.DataSource = bs;
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Fail to update your changed");
-                Debug.WriteLine(ex.Message);
-            }
-            this.dataGridView1.RefreshEdit();
-            loadTable();
         }
         private void dataGridView1_DataError(object sender, DataGridViewDataErrorEventArgs e)
         {
@@ -264,6 +275,54 @@ namespace WindowsFormsApplication1
             dt.Clear();
             adp.Fill(dt);
             this.dataGridView1.RefreshEdit();
+        }
+        private void button3_Click(object sender, EventArgs e)
+        {
+            this.panel1.Controls.Clear();
+            bs.Filter = "";
+            LC = new List<UserControl1>();
+            LCx = new List<UserControl2>();
+            addOption();
+        }
+        private void button1_Click(object sender, EventArgs e)
+        {
+            Boolean past = true;
+            StringBuilder str = new StringBuilder();
+            try
+            {
+                this.Validate();
+                foreach (UserControl1 u1 in LC)
+                {
+                    past &= u1.pass;
+                }
+                if (past)
+                {
+                    foreach (UserControl2 u2 in LCx)
+                    {
+                        if (u2.option != null && u2.option.Trim() != "")
+                        {
+                            str.Append(u2.option);
+                        }
+                    }
+                    bs.Filter = str.ToString();
+                }
+                else
+                {
+                    MessageBox.Show(this, "Have option uncompleted", "Error");
+                }
+            }
+            catch
+            {
+                MessageBox.Show(this, "Fail to completed", "Error");
+            }
+        }
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (e.CloseReason == CloseReason.UserClosing)
+            {
+                e.Cancel = true;
+                this.Hide();
+            }
         }
     }
 }
