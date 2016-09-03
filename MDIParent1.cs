@@ -22,7 +22,7 @@ namespace WindowsFormsApplication1
         {
             Form childForm = new Form();
             childForm.MdiParent = this;
-            childForm.Text = "窗口 " + childFormNumber++;
+            childForm.Text = "Form " + childFormNumber++;
             childForm.Show();
         }
 
@@ -30,7 +30,7 @@ namespace WindowsFormsApplication1
         {
             OpenFileDialog openFileDialog = new OpenFileDialog();
             openFileDialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Personal);
-            openFileDialog.Filter = "文本文件(*.txt)|*.txt|所有文件(*.*)|*.*";
+            openFileDialog.Filter = "Txt(*.txt)|*.txt|all file(*.*)|*.*";
             if (openFileDialog.ShowDialog(this) == DialogResult.OK)
             {
                 string FileName = openFileDialog.FileName;
@@ -41,7 +41,7 @@ namespace WindowsFormsApplication1
         {
             SaveFileDialog saveFileDialog = new SaveFileDialog();
             saveFileDialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Personal);
-            saveFileDialog.Filter = "文本文件(*.txt)|*.txt|所有文件(*.*)|*.*";
+            saveFileDialog.Filter = "Txt(*.txt)|*.txt|all file(*.*)|*.*";
             if (saveFileDialog.ShowDialog(this) == DialogResult.OK)
             {
                 string FileName = saveFileDialog.FileName;
