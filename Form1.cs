@@ -223,13 +223,11 @@ namespace WindowsFormsApplication1
             DS.Format = DateTimePickerFormat.Custom;
             DS.CustomFormat = "yyyy/MM/dd";
         }
-
         private void DC_CloseUp(object sender, EventArgs e)
         {
             DC.Format = DateTimePickerFormat.Custom;
             DC.CustomFormat = "yyyy/MM/dd";
         }
-
         private void DC_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (Convert.ToInt32(e.KeyChar) == 27)
@@ -252,7 +250,6 @@ namespace WindowsFormsApplication1
                 checkDatePick(DS,e.RowIndex,2);
             }
         }
-
         private void dataGridView1_UserDeletingRow(object sender, DataGridViewRowCancelEventArgs e)
         {
                 if (MessageBox.Show(this, "Do you want to Delete records?", "Deleting", MessageBoxButtons.YesNo).ToString() == "No")
