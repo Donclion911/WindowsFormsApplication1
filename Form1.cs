@@ -63,6 +63,7 @@ namespace WindowsFormsApplication1
             cnn.Close();
             bs.DataSource = dt;
             this.dataGridView1.DataSource = bs;
+
             DC.DataBindings.Add(new Binding("Text", bs, "DateCreated", true, DataSourceUpdateMode.OnValidation));
             DS.DataBindings.Add(new Binding("Text", bs, "DateShipped", true, DataSourceUpdateMode.OnValidation));
             CE.DataBindings.Add(new Binding("Text", bs, "CustomerEmail", true, DataSourceUpdateMode.OnValidation));
