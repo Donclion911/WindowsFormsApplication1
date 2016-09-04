@@ -17,13 +17,6 @@ namespace WindowsFormsApplication1
         {
             InitializeComponent();
         }
-        private void ShowNewForm(object sender, EventArgs e)
-        {
-            Form childForm = new Form();
-            childForm.MdiParent = this;
-            childForm.Text = "Form " + childFormNumber++;
-            childForm.Show();
-        }
         private void OpenFile(object sender, EventArgs e)
         {
             OpenFileDialog openFileDialog = new OpenFileDialog();
