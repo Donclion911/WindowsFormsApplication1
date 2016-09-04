@@ -533,7 +533,7 @@
             this.MainMenuStrip = this.menuStrip;
             this.Name = "MDIParent1";
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Show;
-            this.Text = "MDIParent1";
+            this.Text = "Demo";
             this.Load += new System.EventHandler(this.MDIParent1_Load);
             this.menuStrip.ResumeLayout(false);
             this.menuStrip.PerformLayout();

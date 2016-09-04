@@ -72,16 +72,19 @@ namespace WindowsFormsApplication1
             foreach (Form childForm in MdiChildren)
             {
                 childForm.Close();
+                childFormNumber = 0;
             }
         }
         private void Test_Click(object sender, EventArgs e)
         {
             f1.Show();
+            childFormNumber++;
         }
         private void MDIParent1_Load(object sender, EventArgs e)
         {
             f1.MdiParent = this;
             f1.Show();
+            childFormNumber++;
         }
     }
 }
