@@ -179,7 +179,7 @@ namespace WindowsFormsApplication1
                 if (!(dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex].ValueType ==
                     dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.GetType()))
                 {
-                    MessageBox.Show(this, "Changed value must be" +
+                    MessageBox.Show(this, "Changed value must be " +
                     dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex].ValueType.Name.ToString(), "Help");
                     dt.RejectChanges();
                     dataGridView1.CurrentCell=dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex];
