@@ -172,7 +172,7 @@ namespace WindowsFormsApplication1
                     MessageBox.Show("There has no any changed");
                 }
             }
-            catch (Exception ex)
+            catch //(Exception ex)
             {
                 MessageBox.Show("Fail to submit form");
                 canceled = true;
