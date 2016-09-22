@@ -54,5 +54,17 @@ namespace WindowsFormsApplication1.Properties {
                 this["Items"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool enable {
+            get {
+                return ((bool)(this["enable"]));
+            }
+            set {
+                this["enable"] = value;
+            }
+        }
     }
 }

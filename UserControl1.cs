@@ -76,7 +76,7 @@ namespace WindowsFormsApplication1
                         case "System.DateTime":
                             this.option =
                                  this.Columes.Text.Trim() +
-                                 domainUpDown1.Text.Trim()+"'" + monthCalendar1.SelectionStart + "'";
+                                 domainUpDown1.Text.Trim()+"'" + monthCalendar1.SelectionStart.Date + "'";
                             break;
                     }
                     pass = true;
@@ -137,7 +137,7 @@ namespace WindowsFormsApplication1
 
         private void monthCalendar1_DateSelected(object sender, DateRangeEventArgs e)
         {
-            Value.Text = e.Start.ToString();
+            Value.Text = e.Start.Date.GetDateTimeFormats()[0].ToString();
             setOption();
             children.goon(index);
         }

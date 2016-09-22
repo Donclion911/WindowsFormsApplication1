@@ -152,7 +152,14 @@ namespace WindowsFormsApplication1
                         {
                             canceled = true;
                         }
-                    this.button4.Enabled = true;
+                    if (!this.button4.Enabled)
+                    {
+                        dt.Clear();
+                        adp.Fill(dt);
+                        this.dataGridView1.RefreshEdit();
+                        button4.Enabled = true;
+                        tabPage2.Enabled = true;
+                    }
                     dataGridView1.Enabled = true;
                     this.dataGridView1.RefreshEdit();
                     if (!canceled)
@@ -165,7 +172,7 @@ namespace WindowsFormsApplication1
                     MessageBox.Show("There has no any changed");
                 }
             }
-            catch //(Exception ex)..
+            catch (Exception ex)
             {
                 MessageBox.Show("Fail to submit form");
                 canceled = true;
@@ -204,6 +211,8 @@ namespace WindowsFormsApplication1
         }
         private void button4_Click(object sender, EventArgs e)
         {
+            this.bs.Filter = "";
+            
             newRow = dt.NewRow();
             dt.Rows.Add(newRow);
             DC.Text = "";
@@ -217,6 +226,7 @@ namespace WindowsFormsApplication1
             DS.Format = DateTimePickerFormat.Custom;
             DS.CustomFormat = "yyyy/MM/dd";
             button4.Enabled = false;
+            tabPage2.Enabled = false;
         }
         private void DS_CloseUp(object sender, EventArgs e)
         {
@@ -266,7 +276,7 @@ namespace WindowsFormsApplication1
                 bs.EndEdit();
                 adp.Update(dt);
             }
-            catch
+            catch //(Exception ex)
             {
                 MessageBox.Show(this,"Fail to delete records.","FeedBack");
             }
